@@ -10,7 +10,7 @@ class SliderWithCaption extends PolymerElement {
                 display: block;
             }
         </style> [[caption]] 
-   <paper-slider id="slider" style="width: 100%" pin="" value="{{value}}" min="[[min]]" max="[[max]]" step="[[step]]"></paper-slider> 
+   <slot name="slider"></slot> 
 `;
   }
 
@@ -23,24 +23,7 @@ class SliderWithCaption extends PolymerElement {
           caption: {
               type: String,
               value: 'caption'
-          },
-          value: {
-              type: Number,
-              value: 80,
-              notify: true
-          },
-          min: {
-              type: Number,
-              value: 0
-          },
-          max: {
-              type: Number,
-              value: 100
-          },
-          step: {
-              type: Number,
-              value: 1
-          }
+          },         
       };
   }
 }

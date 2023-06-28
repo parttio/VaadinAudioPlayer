@@ -192,7 +192,7 @@ class AudioPlayer extends PolymerElement {
      * @param {number} volume
      */
     setVolume(volume) {
-        this.$server.reportVolumeChange(volume);
+        this.$server.reportVolumeChange(volume, [0,1]);
         this._player.volume = volume;
     }
 
@@ -201,6 +201,7 @@ class AudioPlayer extends PolymerElement {
      * @param {number} channel
      */
     setVolumeOnChannel(volume, channel) {
+		this.$server.reportVolumeChange(volume, [channel]);
         this._player.setVolumeOnChannel(volume, channel);
     }
 

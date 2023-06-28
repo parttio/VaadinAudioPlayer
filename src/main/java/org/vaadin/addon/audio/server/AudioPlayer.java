@@ -1,16 +1,23 @@
 package org.vaadin.addon.audio.server;
 
-import com.vaadin.flow.component.*;
+import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.ClientCallable;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.DetachEvent;
+import com.vaadin.flow.component.Tag;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.dependency.JsModule;
-import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
 import com.vaadin.flow.server.StreamRegistration;
 import com.vaadin.flow.server.StreamResource;
 import com.vaadin.flow.server.StreamResourceRegistry;
 import com.vaadin.flow.server.VaadinSession;
-import com.vaadin.flow.templatemodel.TemplateModel;
 import elemental.json.Json;
 import elemental.json.JsonArray;
 import elemental.json.JsonObject;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import org.vaadin.addon.audio.server.state.PlaybackState;
 import org.vaadin.addon.audio.server.state.StateChangeCallback;
 import org.vaadin.addon.audio.server.state.VolumeChangeCallback;
@@ -20,16 +27,11 @@ import org.vaadin.addon.audio.shared.ChunkDescriptor;
 import org.vaadin.addon.audio.shared.SharedEffect;
 import org.vaadin.addon.audio.shared.util.Log;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
-
 // This is the server-side UI component that provides public API for AudioPlayer
 @SuppressWarnings("serial")
 @Tag("audio-player")
 @JsModule("./audio-player.js")
-public class AudioPlayer extends PolymerTemplate<TemplateModel> {
+public class AudioPlayer extends Component {
 
     private Stream stream = null;
     private PlaybackState playbackState = PlaybackState.STOPPED;
@@ -259,7 +261,7 @@ public class AudioPlayer extends PolymerTemplate<TemplateModel> {
         }
 
         currentPosition = millis;
-        getElement().callFunction("setPlaybackPosition", millis);
+        getElement().callJsFunction("setPlaybackPosition", millis);
         Log.message(AudioPlayer.this, "set playback position: " + millis);
     }
 
@@ -277,7 +279,7 @@ public class AudioPlayer extends PolymerTemplate<TemplateModel> {
      * Starts playing audio from the beginning of the audio file.
      */
     public void play() {
-        getElement().callFunction("startPlayback");
+        getElement().callJsFunction("startPlayback");
         Log.message(AudioPlayer.this, "start or restart playback");
     }
 
@@ -296,7 +298,7 @@ public class AudioPlayer extends PolymerTemplate<TemplateModel> {
      * Pauses the current audio.
      */
     public void pause() {
-        getElement().callFunction("pausePlayback");
+        getElement().callJsFunction("pausePlayback");
         Log.message(AudioPlayer.this, "pause playback");
     }
 
@@ -304,7 +306,7 @@ public class AudioPlayer extends PolymerTemplate<TemplateModel> {
      * Plays audio from last known position (usually used to play while paused).
      */
     public void resume() {
-        getElement().callFunction("resumePlayback");
+        getElement().callJsFunction("resumePlayback");
         Log.message(AudioPlayer.this, "resume playback");
     }
 
@@ -312,7 +314,7 @@ public class AudioPlayer extends PolymerTemplate<TemplateModel> {
      * Stops playing the audio and resets the position to 0 (beginning of audio file).
      */
     public void stop() {
-        getElement().callFunction("stopPlayback");
+        getElement().callJsFunction("stopPlayback");
         Log.message(AudioPlayer.this, "stop playback");
     }
 
@@ -335,12 +337,12 @@ public class AudioPlayer extends PolymerTemplate<TemplateModel> {
      *            volume level
      */
     public void setVolume(double volume) {
-        getElement().callFunction("setVolume", volume);
+        getElement().callJsFunction("setVolume", volume);
         Log.message(AudioPlayer.this, "setting volume to " + volume);
     }
 
     public void setVolumeOnChannel(double volume, int channel) {
-        getElement().callFunction("setVolumeOnChannel", volume, channel);
+        getElement().callJsFunction("setVolumeOnChannel", volume, channel);
         Log.message(AudioPlayer.this, "setting volume to " + volume + " on channel " + channel);
     }
 
@@ -367,7 +369,7 @@ public class AudioPlayer extends PolymerTemplate<TemplateModel> {
      *            speed ratio
      */
     public void setPlaybackSpeed(double playbackSpeed) {
-        getElement().callFunction("setPlaybackSpeed", playbackSpeed);
+        getElement().callJsFunction("setPlaybackSpeed", playbackSpeed);
         Log.message(AudioPlayer.this, "setting playback speed to " + playbackSpeed);
     }
 
@@ -380,7 +382,7 @@ public class AudioPlayer extends PolymerTemplate<TemplateModel> {
      * @param balance
      */
     public void setBalance(double balance) {
-        getElement().callFunction("setBalance", balance);
+        getElement().callJsFunction("setBalance", balance);
     }
 
     /**

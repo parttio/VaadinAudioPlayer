@@ -1,7 +1,5 @@
 package org.vaadin.addon.audio.server.util;
 
-import com.sun.media.sound.UlawCodec;
-
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -31,9 +29,8 @@ public class ULawUtil {
     public static ByteBuffer decodeULawToPcm(AudioInputStream uLawInputStream) throws IOException {
         System.out.println("Decoding u-law to signed pcm data");
         ByteBuffer buffer;
-        UlawCodec codec = new UlawCodec();
         // decode u-law audio to pcm
-        AudioInputStream convertedStream = codec.getAudioInputStream(AudioFormat.Encoding.PCM_SIGNED, uLawInputStream);
+        AudioInputStream convertedStream = AudioSystem.getAudioInputStream(AudioFormat.Encoding.PCM_SIGNED, uLawInputStream);
         // save the decoded file to a temp file just until we can read into a byte buffer
         File tmp = File.createTempFile("tempAudioFile", ".wav");
         AudioSystem.write(convertedStream, AudioFileFormat.Type.WAVE, tmp);

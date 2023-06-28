@@ -5,14 +5,14 @@
 
     <groupId>org.vaadin.addon.audio</groupId>
     <artifactId>AudioPlayer</artifactId>
-    <version>3.1.0</version>
+    <version>4.0.0</version>
     <name>AudioPlayer Add-on</name>
 
-    <properties>
-        <vaadin.version>14.8.3</vaadin.version>
+	<properties>
+		<vaadin.version>24.1.1</vaadin.version>
 
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
@@ -25,7 +25,7 @@
         <Vaadin-Addon>${project.artifactId}-${project.version}.jar</Vaadin-Addon>
         <maven.javadoc.skip>true</maven.javadoc.skip>
 
-        <jetty.version>9.4.28.v20200408</jetty.version>
+        <jetty.version>11.0.14</jetty.version>
     </properties>
     <organization>
         <name>Vesa Nieminen</name>
@@ -117,10 +117,10 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
+		 <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.0.0</version>
             <scope>provided</scope>
         </dependency>
 

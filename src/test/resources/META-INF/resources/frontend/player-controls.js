@@ -1,8 +1,7 @@
 import '@polymer/polymer/polymer-legacy.js';
-import '@vaadin/vaadin-button/src/vaadin-button.js';
-import '@vaadin/vaadin-ordered-layout/src/vaadin-horizontal-layout.js';
-import './slider-with-caption.js';
-import '@vaadin/vaadin-ordered-layout/src/vaadin-vertical-layout.js';
+import '@vaadin/button/src/vaadin-button.js';
+import '@vaadin/horizontal-layout/src/vaadin-horizontal-layout.js';
+import '@vaadin/vertical-layout/src/vaadin-vertical-layout.js';
 import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
 
@@ -26,40 +25,24 @@ class PlayerControls extends PolymerElement {
       [[time]] 
     </div> 
    </vaadin-vertical-layout> 
-   <slider-with-caption id="positionSlider" caption="Position" value="0" max="1000"></slider-with-caption> 
+   <slot name="positionSlider"></slot> 
    <vaadin-horizontal-layout theme="spacing margin" style="width: 100%; height: 100%; justify-content: center;"> 
-    <vaadin-button theme="primary" id="back5Button">
-      Back 5 sec 
-    </vaadin-button> 
-    <vaadin-button theme="primary" id="stopButton">
-      Stop 
-    </vaadin-button> 
-    <vaadin-button theme="primary" id="pauseButton">
-      Pause 
-    </vaadin-button> 
-    <vaadin-button theme="primary" id="playButton">
-      Play 
-    </vaadin-button> 
-    <vaadin-button theme="primary" id="forward5Button">
-      Forward 5 sec 
-    </vaadin-button> 
-    <vaadin-button theme="primary" id="range1">
-      Set Range 2000-10000
-    </vaadin-button> 
-    <vaadin-button theme="primary" id="range2">
-      Set Range 3000-11000
-    </vaadin-button> 
-    <vaadin-button theme="primary" id="range3">
-      Clear Ranges
-    </vaadin-button> 
-    <vaadin-combo-box id = "onEndRangeOptions"></vaadin-combo-box>
+    <slot name="back5Button"></slot> 
+    <slot name="stopButton"></slot> 
+    <slot name="pauseButton"></slot> 
+    <slot name="playButton"></slot> 
+    <slot name="forward5Button"></slot> 
+    <slot name="range1"></slot> 
+    <slot name="range2"></slot> 
+    <slot name="range3"></slot> 
+    <slot name="onEndRangeOptions"></slot>
    </vaadin-horizontal-layout> 
    <vaadin-horizontal-layout theme="margin" style="width: 100%; height: 100%;"> 
-    <slider-with-caption id="volumeSlider" style="width: 250px" caption="Volume" value="1" max="10" step="0.1"></slider-with-caption> 
-    <slider-with-caption id="leftGainSlider" style="width: 250px" caption="L" value="1" max="10" step="0.1"></slider-with-caption> 
-    <slider-with-caption id="rightGainSlider" style="width: 250px" caption="R" value="1" max="10" step="0.1"></slider-with-caption> 
-    <slider-with-caption id="balanceSlider" style="width: 250px" min="-1" caption="Balance" value="0" max="1" step="0.1"></slider-with-caption> 
-    <slider-with-caption id="speedSlider" style="width: 250px" min="0.5" caption="Speed" value="1" max="3" step="0.1"></slider-with-caption> 
+   	<slot name="volumeSlider"></slot>
+   	<slot name="leftGainSlider"></slot>
+   	<slot name="rightGainSlider"></slot>
+   	<slot name="balanceSlider"></slot>
+   	<slot name="speedSlider"></slot>
    </vaadin-horizontal-layout> 
    <div style="display: flex; align-items: center; justify-content: flex-end;"> 
     <div class="margin">
@@ -68,9 +51,7 @@ class PlayerControls extends PolymerElement {
     <div class="margin">
       [[streamStatus]] 
     </div> 
-    <vaadin-button theme="error" id="deleteButton" class="margin">
-      Delete stream 
-    </vaadin-button> 
+    <slot name="deleteButton"></slot> 
    </div> 
 `;
   }

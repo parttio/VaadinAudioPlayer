@@ -3,7 +3,6 @@ package org.vaadin.addon.audio.demo;
 import com.vaadin.flow.component.AbstractSinglePropertyField;
 import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.Tag;
-import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.NpmPackage;
 
@@ -36,6 +35,10 @@ public class PaperSlider extends AbstractSinglePropertyField<PaperSlider, Double
 
     public void setMaxValue(double max) {
         getElement().setProperty("max", max * scale);
+    }
+    
+    public void setStep(double step) {
+        getElement().setProperty("step", step * scale);
     }
 
     @Override
