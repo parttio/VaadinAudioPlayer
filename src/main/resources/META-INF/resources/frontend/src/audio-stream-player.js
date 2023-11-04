@@ -41,6 +41,17 @@ export const AudioStreamPlayer = (() => {
 
             this._multiChannelGainNode = new MultiChannelGainNode(this._gainNode);
 
+            // Set channel interpretation to speakers so that a mono audio source is output on two channels
+            console.log('setting channel interpretation to speakers');
+
+            const oscillator = this._context.createOscillator();
+            const gainNode = this._gainNode;
+
+            oscillator.connect(gainNode);
+            gainNode.connect(this._context.destination);
+
+            oscillator.channelInterpretation = "speakers";
+
             // Could use StereoPannerNode instead, but it is missing in Safari :-(
             this._pannerNode = this._context.createPanner();
             this._pannerNode.panningModel = 'equalpower';
@@ -229,6 +240,11 @@ export const AudioStreamPlayer = (() => {
                             audio => {
                                 const currentChunkTimestamp = Math.max(0, this._position - this._chunkOverlapTime);
                                 player.buffer = audio;
+
+								//console.log('switching to 2-channel mono: ', audio.length);
+                                //audio.output.L = input.M;
+                                //audio.output.R = input.M;
+
                                 if (this._tryResume && timestamp === currentChunkTimestamp) {
                                     this._tryResume();
                                 }
