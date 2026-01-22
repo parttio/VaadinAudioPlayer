@@ -5,7 +5,7 @@
 
     <groupId>org.vaadin.addon.audio</groupId>
     <artifactId>AudioPlayer</artifactId>
-    <version>4.1.0</version>
+    <version>5.0.0</version>
     <name>AudioPlayer Add-on</name>
 
 	<properties>
@@ -111,6 +111,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <!-- This can be replaced with TestNG or some other test framework supported
@@ -162,9 +163,6 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-maven-plugin</artifactId>
                 <version>${vaadin.version}</version>
-                <configuration>
-                	<pnpmEnable>true</pnpmEnable>
-                </configuration>
                 <executions>
                     <execution>
                         <goals>
