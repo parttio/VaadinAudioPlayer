@@ -11,9 +11,6 @@ import com.vaadin.flow.server.StreamRegistration;
 import com.vaadin.flow.server.StreamResource;
 import com.vaadin.flow.server.StreamResourceRegistry;
 import com.vaadin.flow.server.VaadinSession;
-import elemental.json.Json;
-import elemental.json.JsonArray;
-import elemental.json.JsonObject;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -26,6 +23,9 @@ import org.vaadin.addon.audio.server.util.StringFormatter;
 import org.vaadin.addon.audio.shared.ChunkDescriptor;
 import org.vaadin.addon.audio.shared.SharedEffect;
 import org.vaadin.addon.audio.shared.util.Log;
+import tools.jackson.databind.node.ArrayNode;
+import tools.jackson.databind.node.JsonNodeFactory;
+import tools.jackson.databind.node.ObjectNode;
 
 // This is the server-side UI component that provides public API for AudioPlayer
 @SuppressWarnings("serial")
@@ -164,11 +164,13 @@ public class AudioPlayer extends Component {
         registerStreamChunks();
 
         // TODO: prettify this verbose JSON serialization
-        JsonArray chunksJson = Json.createArray();
+        ArrayNode chunksJson = new ArrayNode(JsonNodeFactory.instance);
+
         List<ChunkDescriptor> chunks = stream.getChunks();
         for (int i = 0; i < chunks.size(); i++) {
             ChunkDescriptor chunk = chunks.get(i);
-            JsonObject chunkDescriptor = Json.createObject();
+            ObjectNode chunkDescriptor = JsonNodeFactory.instance.objectNode();
+
             chunkDescriptor.put("id", chunk.getId());
             chunkDescriptor.put("startTimeOffset", chunk.getStartTimeOffset());
             chunkDescriptor.put("endTimeOffset", chunk.getEndTimeOffset());
@@ -178,7 +180,7 @@ public class AudioPlayer extends Component {
             chunkDescriptor.put("startSampleOffset", chunk.getStartSampleOffset());
             chunkDescriptor.put("endSampleOffset", chunk.getEndSampleOffset());
             chunkDescriptor.put("url", chunk.getUrl().toASCIIString());
-            chunksJson.set(i, chunkDescriptor);
+            chunksJson.add(chunkDescriptor);
         }
         getElement().setPropertyJson("chunks", chunksJson);
         duration = stream.getDuration();

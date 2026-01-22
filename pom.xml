@@ -5,14 +5,14 @@
 
     <groupId>org.vaadin.addon.audio</groupId>
     <artifactId>AudioPlayer</artifactId>
-    <version>4.0.0</version>
+    <version>4.1.0</version>
     <name>AudioPlayer Add-on</name>
 
 	<properties>
-		<vaadin.version>24.1.1</vaadin.version>
+		<vaadin.version>25.0.3</vaadin.version>
 
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
@@ -25,7 +25,7 @@
         <Vaadin-Addon>${project.artifactId}-${project.version}.jar</Vaadin-Addon>
         <maven.javadoc.skip>true</maven.javadoc.skip>
 
-        <jetty.version>11.0.14</jetty.version>
+        <jetty.version>11.0.26</jetty.version>
     </properties>
     <organization>
         <name>Vesa Nieminen</name>
@@ -100,6 +100,11 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-dev</artifactId>
+        </dependency>
+
 
         <!-- Added to provide logging output as Flow uses -->
         <!-- the unbound SLF4J no-operation (NOP) logger implementation -->
@@ -130,6 +135,7 @@
             <artifactId>vorbis-java-core</artifactId>
             <version>0.8</version>
         </dependency>
+
     </dependencies>
 
     <build>

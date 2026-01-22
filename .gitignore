@@ -9,3 +9,6 @@ target/
 node
 package-lock.json
 package.json
+/.tool-versions
+/src/main/bundles/
+/src/main/frontend/
