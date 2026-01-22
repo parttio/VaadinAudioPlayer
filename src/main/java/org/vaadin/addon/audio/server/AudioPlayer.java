@@ -41,8 +41,8 @@ public class AudioPlayer extends Component {
     private List<StreamRegistration> chunkRegistrations = new ArrayList<>();
 
     // TODO: use a proper event system
-    private List<StateChangeCallback> stateCallbacks = new ArrayList<>();
-    private List<VolumeChangeCallback> volumeCallbacks = new ArrayList<>();
+    private final List<StateChangeCallback> stateCallbacks = new ArrayList<>();
+    private final List<VolumeChangeCallback> volumeCallbacks = new ArrayList<>();
 
     public int chunkTimeMillis;
 
@@ -52,7 +52,7 @@ public class AudioPlayer extends Component {
 
     public int reportPositionRepeatTime = 500;
 
-    public final List<SharedEffect> effects = new ArrayList<SharedEffect>();
+    public final List<SharedEffect> effects = new ArrayList<>();
 
     public int startRange;
 

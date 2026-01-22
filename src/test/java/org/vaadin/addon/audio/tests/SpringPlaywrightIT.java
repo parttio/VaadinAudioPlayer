@@ -1,0 +1,16 @@
+package org.vaadin.addon.audio.tests;
+
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import org.vaadin.addons.dramafinder.AbstractBasePlaywrightIT;
+
+public abstract class SpringPlaywrightIT extends AbstractBasePlaywrightIT {
+
+    @LocalServerPort
+    private int port;
+
+    @Override
+    public String getUrl() {
+        return String.format("http://localhost:%d/", port);
+    }
+}

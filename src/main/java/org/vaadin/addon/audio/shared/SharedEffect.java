@@ -13,7 +13,7 @@ public class SharedEffect implements Serializable {
 
     private String id;
     private EffectName name;
-    private List<SharedEffectProperty> properties = new ArrayList<SharedEffectProperty>();
+    private final List<SharedEffectProperty> properties = new ArrayList<>();
 
     public SharedEffect() {
         // for gwt

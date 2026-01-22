@@ -8,11 +8,11 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class PCMFormat implements Serializable {
 
-    private int numChannels; // 1: mono, 2: stereo
-    private int sampleRate; // samples (values) per second of audio
-    private int byteRate; // sampleRate * numChannels * (bitsPerSample / 8)
-    private int blockAlign; // numChannels * (bitsPerSample / 8)
-    private int bitsPerSample; // usually either 8 or 16
+    private final int numChannels; // 1: mono, 2: stereo
+    private final int sampleRate; // samples (values) per second of audio
+    private final int byteRate; // sampleRate * numChannels * (bitsPerSample / 8)
+    private final int blockAlign; // numChannels * (bitsPerSample / 8)
+    private final int bitsPerSample; // usually either 8 or 16
 
     public PCMFormat(int numChannels, int sampleRate, int bitsPerSample) {
         this.numChannels = numChannels;

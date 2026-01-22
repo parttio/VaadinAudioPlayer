@@ -26,7 +26,7 @@ public class VolumeEffect extends Effect {
     @Override
     public SharedEffect getSharedEffectObject() {
         SharedEffect shared = new SharedEffect(getID(), SharedEffect.EffectName.VolumeEffect);
-        List<SharedEffectProperty> props = new ArrayList<SharedEffectProperty>();
+        List<SharedEffectProperty> props = new ArrayList<>();
         props.add(new SharedEffectProperty(SharedEffectProperty.PropertyName.Gain, getGain() + ""));
         shared.setProperties(props);
         return shared;

@@ -1,5 +1,6 @@
 package org.vaadin.addon.audio.server;
 
+import org.vaadin.addon.audio.server.encoders.WaveEncoder;
 import org.vaadin.addon.audio.server.state.StreamState;
 import org.vaadin.addon.audio.server.state.StreamStateCallback;
 import org.vaadin.addon.audio.shared.ChunkDescriptor;
@@ -17,18 +18,8 @@ public class Stream {
     private static final int CHUNK_LENGTH_MILLIS_DEFAULT = 5000;
     private static final int CHUNK_OVERLAP_MILLIS = 0;
 
-    public static interface Callback {
-        public void onComplete(byte[] data);
-    }
-
-    private static class ChunkRequest {
-        ChunkDescriptor chunk;
-        Callback callback;
-
-        ChunkRequest(ChunkDescriptor d, Callback c) {
-            this.chunk = d;
-            this.callback = c;
-        }
+    public interface Callback {
+        void onComplete(byte[] data);
     }
 
     private List<StreamStateCallback> stateCallbacks = new ArrayList<>();
@@ -40,8 +31,8 @@ public class Stream {
     private StreamState streamState = StreamState.IDLE;
 
     // TODO: pass in chunk length and overlap in an optional constructor
-    private int chunkLength;
-    private int chunkOverlapLength = CHUNK_OVERLAP_MILLIS;
+    private final int chunkLength;
+    private final int chunkOverlapLength = CHUNK_OVERLAP_MILLIS;
 
     private boolean compression = false;
     private int sampleCount = 0;

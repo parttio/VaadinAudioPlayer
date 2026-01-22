@@ -4,6 +4,7 @@ import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.router.Route;
 import org.vaadin.addon.audio.server.AudioPlayer;
 import org.vaadin.addon.audio.server.Encoder;
@@ -40,7 +41,7 @@ public class DemoUIFlow extends VerticalLayout {
     public static final String TEST_FILE_PATH = "src/test/resources/org/vaadin/addon/audio/wav";
 
     public DemoUIFlow() {
-        ComboBox<String> fileList = new ComboBox<>("File", listFileNames(TEST_FILE_PATH));
+        Select<String> fileList = new Select<>("File", listFileNames(TEST_FILE_PATH));
         fileList.addValueChangeListener(this::fileSelected);
         fileList.setWidth("400px");
         add(fileList);
@@ -113,7 +114,7 @@ public class DemoUIFlow extends VerticalLayout {
         return fnames;
     }
 
-    private void fileSelected(AbstractField.ComponentValueChangeEvent<ComboBox<String>, String> e) {
+    private void fileSelected(AbstractField.ComponentValueChangeEvent<Select<String>, String> e) {
         String itemName = e.getValue();
 
         // Choose encoder based on support
